@@ -5,6 +5,7 @@
 import discord
 
 from gsheet import *
+from decouple import config
 
 client = discord.Client()
 sheet = gsheet()
@@ -152,4 +153,4 @@ async def on_message(message):
                     await message.channel.send('This bot was made by hugonun(https://github.com/hugonun/).\nSource code: https://github.com/hugonun/discord2sheet-bot')
 
 
-client.run('ODUyMDExOTkxMTUyNDU5ODA2.YMAoAA.M0ahmt_D77fOx_SofDgtJqT0lrU') # Add bot token here
+client.run(config('TOKEN')) # Add bot token here
