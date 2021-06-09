@@ -1,6 +1,7 @@
 # BSD 3-Clause License
 # Copyright (c) 2019, Hugonun(https://github.com/hugonun)
 # All rights reserved.
+from keep_alive import keep_alive
 
 import discord
 
@@ -9,6 +10,8 @@ from decouple import config
 
 client = discord.Client()
 sheet = gsheet()
+
+keep_alive()
 
 @client.event
 async def on_ready():
