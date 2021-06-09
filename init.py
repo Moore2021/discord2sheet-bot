@@ -26,7 +26,7 @@ async def on_message(message):
         await message.channel.send('You don\'t have the required role!')
         return
 
-    SPREADSHEET_ID = '13PzOtRpqnjmHkID0eCUVUtNfyTAjp44xtxLSNlJ9IGQ' # Add ID here
+    SPREADSHEET_ID = config('SPREADSHEET_ID') # Add ID here
 
     # Command to insert data to excel
     if message.content.startswith('>>strike '):
