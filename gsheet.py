@@ -43,4 +43,11 @@ class gsheet(object):
         result = sheet.values().append(
             spreadsheetId=sheetid, range=sheetrange,
             valueInputOption='RAW', body=body).execute()
-        
+    def read(self,sheetid):
+        sheet = self.service.spreadsheets()
+        # Call the Sheets API
+        range_names = 'A:F'
+        result = sheet.values().get(spreadsheetId=sheetid, range=range_names).execute()
+        ranges = result.get('values', [])
+        print('{0} ranges retrieved.'.format(len(ranges)))
+        return ranges
