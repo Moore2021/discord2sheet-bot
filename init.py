@@ -1,17 +1,14 @@
 # BSD 3-Clause License
 # Copyright (c) 2019, Hugonun(https://github.com/hugonun)
 # All rights reserved.
-from keep_alive import keep_alive
-
+import asyncio
 import discord
 
 from gsheet import *
-from decouple import config
+import os
 
 client = discord.Client()
 sheet = gsheet()
-
-keep_alive()
 
 @client.event
 async def on_ready():
@@ -29,7 +26,7 @@ async def on_message(message):
         await message.channel.send('You don\'t have the required role!')
         return
 
-    SPREADSHEET_ID = config('SPREADSHEET_ID') # Add ID here
+    SPREADSHEET_ID = os.getenv('SPREADSHEET_ID') # Add ID here
 
     # Command to insert data to excel
     if message.content.startswith('>>strike '):
@@ -70,7 +67,6 @@ async def on_message(message):
             # Add
             print(message.created_at)
             target_user = await message.guild.fetch_member(result[0])
-            result[1] = translate_offense_number[offense_number]
             result.insert(1, 'Warning')
             result.insert(1, '{0}#{1}'.format(target_user.name, target_user.discriminator))
             DATA = [str(message.created_at)] + ['{0}#{1} ({2})'.format(message.author.name, message.author.discriminator, str(message.author.id))] + result
@@ -156,4 +152,4 @@ async def on_message(message):
                     await message.channel.send('This bot was made by hugonun(https://github.com/hugonun/).\nSource code: https://github.com/hugonun/discord2sheet-bot')
 
 
-client.run(config('TOKEN')) # Add bot token here
+client.run(os.getenv('TOKEN')) # Add bot token here
