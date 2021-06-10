@@ -25,7 +25,7 @@ class gsheet(object):
                 self.creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.env', SCOPES)
+                    'credentials.json', SCOPES)
                 self.creds = flow.run_local_server()
             # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
