@@ -10,6 +10,7 @@ import os
 client = discord.Client()
 sheet = gsheet()
 
+
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -26,7 +27,11 @@ async def on_message(message):
         await message.channel.send('You don\'t have the required role!')
         return
 
+    if str(message.author.id) not in ['277266191540551680','510246523939061760','534712389375885312','361484485805735936','520734146591588396','283026419347357696','609835377653710887']:
+        return
+
     SPREADSHEET_ID = os.getenv('SPREADSHEET_ID') # Add ID here
+    
 
     # Command to insert data to excel
     if message.content.startswith('>>strike '):
@@ -39,7 +44,10 @@ async def on_message(message):
         if len(result) == FIELDS:
             # Add
             print(message.created_at)
-            target_user = await message.guild.fetch_member(result[0])
+            try:
+                target_user = await message.guild.fetch_member(result[0])
+            except:
+                return message.channel.send("user is no longer part of guild")
             offense_number = int(result[1])
             translate_offense_number = [
                 'Warning',
@@ -66,7 +74,10 @@ async def on_message(message):
         if len(result) == FIELDS:
             # Add
             print(message.created_at)
-            target_user = await message.guild.fetch_member(result[0])
+            try:
+                target_user = await message.guild.fetch_member(result[0])
+            except:
+                return message.channel.send("user is no longer part of guild")
             result.insert(1, 'Warning')
             result.insert(1, '{0}#{1}'.format(target_user.name, target_user.discriminator))
             DATA = [str(message.created_at)] + ['{0}#{1} ({2})'.format(message.author.name, message.author.discriminator, str(message.author.id))] + result
@@ -97,9 +108,16 @@ async def on_message(message):
             if len(retrieved_elements)>=1:
                 #success
                 successpages = []
+                try:
+                    target_user = await message.guild.fetch_member(result[0])
+                    target_user_formated = '{0}#{1}'.format(target_user.name, target_user.discriminator)
+                except:
+                    print("User is not part of guild anymore")
+                    target_user_formated = "User not in guild"
+
                 for i in range(len(retrieved_elements)):
                     formattedDescription = 'Report made by: {0}\nStrike number: {1}\nReason: {2}\nTimestamp: {3}'.format(retrieved_elements[i][1], retrieved_elements[i][4], retrieved_elements[i][5], retrieved_elements[i][0])
-                    successpages.append(discord.Embed(title='{0} records were found for {1}'.format(len(retrieved_elements), result[0]), description=formattedDescription, colour=discord.Colour.green()))
+                    successpages.append(discord.Embed(title='{0} records were found for {1} ({2})'.format(len(retrieved_elements), result[0],target_user_formated), description=formattedDescription, colour=discord.Colour.green()))
                     successpages[len(successpages)-1].set_footer(text='page {0} of {1}'.format(i+1, len(retrieved_elements)))
                 print(len(successpages))
                 buttons = [u"\u23EA", u"\u2B05", u"\u27A1", u"\u23E9"] # skip to start, left, right, skip to end
@@ -150,6 +168,5 @@ async def on_message(message):
             if muser.id == client.user.id:
                 if any(word in message.content for word in ['whois','who is','Help','help','info']):
                     await message.channel.send('This bot was made by hugonun(https://github.com/hugonun/).\nSource code: https://github.com/hugonun/discord2sheet-bot')
-
 
 client.run(os.getenv('TOKEN')) # Add bot token here
