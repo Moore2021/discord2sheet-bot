@@ -28,7 +28,7 @@ class gsheet(object):
                 self.creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_config({"installed":{"client_id":os.getenv('CLIENT_ID'),"project_id":os.getenv('PROJECT_ID'),"auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":os.getenv('CLIENT_SECRET'),"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}, SCOPES)
-                self.creds = flow.run_local_server()
+                self.creds = flow.run_local_server(port=os.getenv('PORT') or 5000)
             # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
                 pickle.dump(self.creds, token)
