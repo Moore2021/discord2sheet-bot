@@ -48,7 +48,7 @@ class gsheet(object):
     def read(self,sheetid):
         sheet = self.service.spreadsheets()
         # Call the Sheets API
-        range_names = 'A:F'
+        range_names = '\'Form Responses 1\'!A:F'
         result = sheet.values().get(spreadsheetId=sheetid, range=range_names).execute()
         ranges = result.get('values', [])
         print('{0} ranges retrieved.'.format(len(ranges)))

@@ -20,7 +20,7 @@ async def on_message(message):
     if message.author == client.user:
         return
     
-    # Restrict the command to a role
+    # Restrict the semi-command to a role
     # Change REQUIREDROLE to a role id or None
     REQUIREDROLE = None
     if REQUIREDROLE is not None and discord.utils.get(message.author.roles, id=str(REQUIREDROLE)) is None:
@@ -33,9 +33,9 @@ async def on_message(message):
     SPREADSHEET_ID = os.getenv('SPREADSHEET_ID') # Add ID here
     
 
-    # Command to insert data to excel
+    # semi-command to insert data to excel
     if message.content.startswith('>>strike '):
-        RANGE_NAME = 'A1'
+        RANGE_NAME = '\'Form Responses 1\'!A1'
         FIELDS = 3 # Amount of fields/cells
 
         # Code
@@ -63,9 +63,9 @@ async def on_message(message):
             await message.channel.send('Your data has been successfully submitted!')
         else:
             # Needs more/less fields
-            await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} comma.'.format(FIELDS,FIELDS-1))
+            await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} semi-comma.'.format(FIELDS,FIELDS-1))
     elif message.content.startswith('>>warn '):
-        RANGE_NAME = 'A1'
+        RANGE_NAME = '\'Form Responses 1\'!A1'
         FIELDS = 2 # Amount of fields/cells
 
         # Code
@@ -85,10 +85,10 @@ async def on_message(message):
             await message.channel.send('Your data has been successfully submitted!')
         else:
             # Needs more/less fields
-            await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} comma.'.format(FIELDS,FIELDS-1))
+            await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} semi-comma.'.format(FIELDS,FIELDS-1))
     # Whois
     elif message.content.startswith('>>lookup '):
-        RANGE_NAME = 'A1'
+        RANGE_NAME = '\'Form Responses 1\'!A1'
         FIELDS = 1 # Amount of fields/cells
 
         # Code
@@ -160,7 +160,7 @@ async def on_message(message):
                 await message.channel.send(embed=failpage)
         else:
             # Needs more/less fields
-            await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} comma.'.format(FIELDS,FIELDS-1))
+            await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} semi-comma.'.format(FIELDS,FIELDS-1))
 
     # Please dont remove the copyright and github repo
     elif len(message.mentions) > 0:
