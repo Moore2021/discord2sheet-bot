@@ -27,8 +27,8 @@ class gsheet(object):
             if self.creds and self.creds.expired and self.creds.refresh_token:
                 self.creds.refresh(Request())
             else:
-                flow = InstalledAppFlow.from_client_config({"installed":{"client_id":os.getenv('CLIENT_ID'),"project_id":os.getenv('PROJECT_ID'),"auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":os.getenv('CLIENT_SECRET'),"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","https://sheet-integration.herokuapp.com/","http://localhost"]}}, SCOPES)
-                self.creds = flow.run_local_server()
+                flow = InstalledAppFlow.from_client_config({"installed":{"client_id":os.getenv('CLIENT_ID'),"project_id":os.getenv('PROJECT_ID'),"auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":os.getenv('CLIENT_SECRET'),"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}, SCOPES)
+                self.creds = flow.run_local_server(host='sheet-integration.herokuapp.com')
             # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
                 pickle.dump(self.creds, token)
