@@ -11,6 +11,7 @@ client = discord.Client()
 sheet = gsheet()
 
 
+
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -30,7 +31,7 @@ async def on_message(message):
     if str(message.author.id) not in ['277266191540551680','510246523939061760','534712389375885312','361484485805735936','520734146591588396','283026419347357696','609835377653710887']:
         return
 
-    SPREADSHEET_ID = os.getenv('SPREADSHEET_ID') # Add ID here
+    SPREADSHEET_ID = CONFIG['SPREADSHEET_ID'] # Add ID here
     
 
     # semi-command to insert data to excel
@@ -169,4 +170,4 @@ async def on_message(message):
                 if any(word in message.content for word in ['whois','who is','Help','help','info']):
                     await message.channel.send('This bot was made by hugonun(https://github.com/hugonun/).\nSource code: https://github.com/hugonun/discord2sheet-bot')
 
-client.run(os.getenv('TOKEN')) # Add bot token here
+client.run(CONFIG["TOKEN"]) # Add bot token here

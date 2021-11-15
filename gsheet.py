@@ -12,6 +12,13 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
+CONFIG = dict()
+with open('config.txt', 'r') as file:
+  for line in file:
+      if not line.startswith("#"):
+          name, var = line.partition("=")[::2]
+          CONFIG[name.strip()] = var
+          
 class gsheet(object):
     def __init__(self):
         SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
@@ -27,7 +34,7 @@ class gsheet(object):
             if self.creds and self.creds.expired and self.creds.refresh_token:
                 self.creds.refresh(Request())
             else:
-                flow = InstalledAppFlow.from_client_config({"installed":{"client_id":os.getenv('CLIENT_ID'),"project_id":os.getenv('PROJECT_ID'),"auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":os.getenv('CLIENT_SECRET'),"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}, SCOPES)
+                flow = InstalledAppFlow.from_client_config({"installed":{"client_id":CONFIG['CLIENT_ID'],"project_id":CONFIG['PROJECT_ID'],"auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":CONFIG['CLIENT_SECRET'],"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}, SCOPES)
                 self.creds = flow.run_local_server()
             # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
