@@ -3,11 +3,19 @@
 # All rights reserved.
 import asyncio
 import discord
-
+import os
 from gsheet import *
 
 client = discord.Client()
 sheet = gsheet()
+
+def isFileEmpty(file):
+    filesize = os.stat(file)
+    if filesize == 0:
+        return True
+    else:
+        return False
+
 
 @client.event
 async def on_ready():
@@ -19,14 +27,25 @@ async def on_message(message):
         return
     
     # Restrict the semi-command to a role
-    # Change REQUIREDROLE to a role id or None
-    REQUIREDROLE = None
+    with open('./configurations/requiredrole.txt', 'r') as file:
+        if not isFileEmpty(file=file):
+            requiredrole = file.read().replace('\n', '')
+        else:
+            requiredrole = None
+    REQUIREDROLE = None or requiredrole
     if REQUIREDROLE is not None and discord.utils.get(message.author.roles, id=str(REQUIREDROLE)) is None:
         await message.channel.send('You don\'t have the required role!')
         return
 
-    if str(message.author.id) not in ['277266191540551680','510246523939061760','534712389375885312','361484485805735936','520734146591588396','283026419347357696','609835377653710887']:
+    with open('./configurations/authorizedusers.txt', 'r') as file:
+        if not isFileEmpty(file=file):
+            authorizedusers = file.read().splitlines()
+        else:
+            authorizedusers = None
+    AUTHORIZEDUSERS = None or authorizedusers
+    if str(message.author.id) not in AUTHORIZEDUSERS:
         return
+        
     with open('spreadsheetid.txt', 'r') as file:
         sheet_id = file.read().replace('\n', '')
     SPREADSHEET_ID = sheet_id # Add ID here

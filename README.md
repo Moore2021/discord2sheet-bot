@@ -1,49 +1,77 @@
 # discord2sheet-bot
 
-This bot allows users to submit messages directly to your Google Sheet.
+For the original README go [here](https://github.com/hugonun/discord2sheet-bot).
 
-Example:
+# Specific to Moore2021/discordsheet-bot fork
 
-`!s Hello world, How are you today?`
-
-Output:
-
-Username - UserID - Date - Field 1 - Field 2
-
-![Google Sheet](https://i.imgur.com/MFx25Ik.png)
+This bot allows users to submit messages directly to your Google Sheet and retrive.
 
 ## How to set it up
 
+### Option 1
+
 **Step 1:** Enable the API and download credentials.json. This can be done here: https://developers.google.com/sheets/api/quickstart/python#step_1_turn_on_the
 
-Make sure credentials.json is stored in the same directory as the bot.
+**Step 2:** Run python3 setup.py:
 
-**Step 2:** Open init.py and change the following values(<>):
+Enter all information that you are prompted for.
 
-SPREADSHEET_ID = <> - The ID of the spreashsheet to store the data. It can be found on the URL once opened.
+*For the google credentials, copy all contents of credentials.json and paste as answer.*
 
-FIELDS = <> - Amount of fields/cells that get stored. They are on the user's message seperated by comma (!s field1, field2,field 3)
-
-client.run('<>') - The token of the Discord bot.
-
-**Step 3:** Install Python dependencies
-
-If you haven't installed Python yet, download it [here](https://www.python.org/).
-
-Install discordpy: `pip install discord.py`
-
-Run the pip command listed here: https://developers.google.com/sheets/api/quickstart/python#step_2_install_the_google_client_library
-
-**Step 4:** Run the bot
+**Step 3:** Run the bot
 
 `python init.py`
 
+### Option 2
+
+**Step 1:** Create directory 'configurations' in source folder.
+
+Example: 'discord2sheet-bot/configurations'
+
+**Step 2:** Enable the API and download credentials.json. This can be done here: https://developers.google.com/sheets/api/quickstart/python#step_1_turn_on_the
+
+Make sure credentials.json is stored in the configurations directory.
+- discord2sheet-bot/configurations/credentials.json
+
+**Step 3:** Create token.txt file and place in configurations directory
+
+On a single line paste in your discord bot token.
+
+**Step 4:** Create spreadsheetid.txt file and place in configurations directory
+
+On a single line paste in your spreadsheet id.
+
+**Step 5:** Run the bot
+
+`python init.py`
 ------
 
 ## Additional configutations
 
-REQUIREDROLE = <> - If you want to restrict the command to a specific role, insert here the role id. If not, insert` None`.
+Require a specific role:
 
-RANGE_NAME = <> - Where the data should go in the spreadsheet. Default value is `A1`.
+### Option 1
 
-DATA = <> - What data goes to the rows, seperated by `[]`. Example: `DATA = [result[0]] + [''] + [result[1]]`
+**Step 1:** Run python3 addit-setup.py
+
+Enter all information that you are prompted for.
+
+### Option 2
+
+**Step 1:** Create requiredrole.txt file and place in configurations directory
+
+On a single line paste in your required role's id.
+
+set authorized users:
+
+### Option 1
+
+**Step 1:** Run python3 addit-setup.py
+
+Enter all information that you are prompted for.
+
+### Option 2
+
+**Step 1:** Create authorizedusers.txt file and place in configurations directory
+
+Paste each user's id on a new line.

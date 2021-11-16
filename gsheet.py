@@ -19,6 +19,14 @@ if not configurations_dir:
 credentials_file_exists = exists('./configurations/credentials.json')
 token_file_exists = exists('./configurations/token.txt')
 spreadsheetid_file_exists = exists('./configurations/spreadsheetid.txt')
+requiredrole_file_exists = exists('./configurations/requiredrole.txt')
+authorizedusers_file_exists = exists('./configurations/authorizedusers.txt')
+
+if not requiredrole_file_exists:
+    open('./configurations/requiredrole.txt','a').close()
+    
+if not authorizedusers_file_exists:
+    open('./configurations/authorizedusers.txt','a').close()
 
 if not credentials_file_exists or not token_file_exists or not spreadsheetid_file_exists:
     print("please run python3 setup.py")
