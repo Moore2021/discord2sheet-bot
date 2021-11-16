@@ -30,8 +30,11 @@ if x=='y' or x=='yes':
     
     """Ask for authorized users"""
     try:
-        y=input("Who are your authorized user(s)? (press enter for default)    ")
+        y=input("Who are your authorized user(s)? *separate each user with a ','* (press enter for default)    ")
         with open('./configurations/authorizedusers.txt', 'w') as authorizedusers_file:
+            raw=y.split(",")
+            [x.strip() for x in raw]
+            y='\n'.join(raw)
             authorizedusers_file.write(y)
     except SystemError:
         y = None
