@@ -109,7 +109,7 @@ async def on_message(message):
             await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} semi-comma.'.format(FIELDS,FIELDS-1))
     # Whois
     elif message.content.startswith('>>lookup '):
-        RANGE_NAME = '\'Form Responses 1\'!A1'
+        RANGE_NAME = '\'Form Responses 6\'!A1'
         FIELDS = 1 # Amount of fields/cells
 
         # Code

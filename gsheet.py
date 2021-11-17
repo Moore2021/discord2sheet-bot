@@ -57,7 +57,6 @@ class gsheet(object):
                 credentials = service_account.Credentials.from_service_account_file(secret_file, scopes=SCOPES)
                 with open('./configurations/googleuser.txt', 'r') as file:
                     user = file.read().replace('\n', '')
-                #self.creds = credentials.with_subject('botvps@discord-moderation-bot-332222.iam.gserviceaccount.com')
                 self.creds = credentials.with_subject(user)
                 
 
