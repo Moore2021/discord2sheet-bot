@@ -56,7 +56,7 @@ async def on_message(message):
 
     # semi-command to insert data to excel
     if message.content.startswith('>>strike '):
-        RANGE_NAME = '\'Form Responses 1\'!A1'
+        RANGE_NAME = '\'Form Responses 6\'!A1'
         FIELDS = 3 # Amount of fields/cells
 
         # Code
@@ -86,7 +86,7 @@ async def on_message(message):
             # Needs more/less fields
             await message.channel.send('Error: You need to add {0} fields, meaning it can only have {1} semi-comma.'.format(FIELDS,FIELDS-1))
     elif message.content.startswith('>>warn '):
-        RANGE_NAME = '\'Form Responses 1\'!A1'
+        RANGE_NAME = '\'Form Responses 6\'!A1'
         FIELDS = 2 # Amount of fields/cells
 
         # Code
@@ -120,6 +120,8 @@ async def on_message(message):
             # Read
             print(message.created_at)
             response = sheet.read(SPREADSHEET_ID)
+
+            print(response)
             retrieved_elements = []
             for response_obj in response:
                 for element in response_obj:
