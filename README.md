@@ -12,11 +12,16 @@ This bot allows users to submit messages directly to your Google Sheet and retri
 
 **Step 1:** Enable the API and download credentials.json. This can be done here: https://developers.google.com/sheets/api/quickstart/python#step_1_turn_on_the
 
+**EDIT** Create a service account not an OAuth 2.0 Client ID. Once service account is made, add that email to the sheet and give edit permissions.
+link for help https://cloud.google.com/docs/authentication/getting-started
+
 **Step 2:** Run python3 setup.py:
 
 Enter all information that you are prompted for.
 
-*For the google credentials, copy all contents of credentials.json and paste as answer.*
+*For the google client secret, copy all contents of client_secret.json and paste as answer.*
+
+*For google user, copy service account email and paste as answer*
 
 **Step 3:** Run the bot
 
@@ -30,8 +35,11 @@ Example: 'discord2sheet-bot/configurations'
 
 **Step 2:** Enable the API and download credentials.json. This can be done here: https://developers.google.com/sheets/api/quickstart/python#step_1_turn_on_the
 
-Make sure credentials.json is stored in the configurations directory.
-- discord2sheet-bot/configurations/credentials.json
+**EDIT** Create a service account not an OAuth 2.0 Client ID. Once service account is made, add that email to the sheet and give edit permissions.
+link for help https://cloud.google.com/docs/authentication/getting-started
+
+Make sure client_secret.json is stored in the configurations directory.
+- discord2sheet-bot/configurations/client_secret.json
 
 **Step 3:** Create token.txt file and place in configurations directory
 

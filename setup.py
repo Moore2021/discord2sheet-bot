@@ -9,10 +9,15 @@ x=input("What is your spreadsheetid ID: ")
 with open('./configurations/spreadsheetid.txt', 'w') as spreadsheetid_file:
     spreadsheetid_file.write(x)
 
-"""Ask for google credentials and then write to credentials.json file"""
-x=input("What is your google credentials.json: ")
-with open('./configurations/credentials.json', 'w') as credentials_file:
-    credentials_file.write(x)
+"""Ask for google client_secret and then write to client_secret.json file"""
+x=input("What is your google client_secret.json: ")
+with open('./configurations/client_secret.json', 'w') as clientsecret_file:
+    clientsecret_file.write(x)
+
+"""Ask for google user and then write to googleuser.txt file"""
+x=input("Who is your google user: ")
+with open('./configurations/googleuser.txt', 'w') as googleuser_file:
+    googleuser_file.write(x)
 
 """Ask if the user would like to add additional configurations"""
 x=input("Would you like to set up additional configurations now? y or n:    ")
