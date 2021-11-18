@@ -53,7 +53,17 @@ On a single line paste in your discord bot token.
 
 On a single line paste in your spreadsheet id.
 
-**Step 5:** Run the bot
+**Step 5:** Create rangenames.txt file and place in configurations directory
+
+On a single line paste in your spreadsheet name and range.
+
+Example: `'Form Responses 6'!A:F`
+
+**Step 6:** Create googleuser.txt file and place in configurations directory
+
+On a single line paste in your google user that was used for the service account.
+
+**Step 7:** Run the bot
 
 `python init.py`
 ------
