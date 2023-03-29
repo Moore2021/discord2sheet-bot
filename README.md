@@ -1,3 +1,6 @@
+# Archived 
+This repo was archived 3/29/2023, And can be used to get the fundamentals on how to interact with the API. However there will not be further updates to this repo.
+
 # discord2sheet-bot
 
 For the original README go [here](https://github.com/hugonun/discord2sheet-bot).
